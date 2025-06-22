@@ -1,0 +1,12 @@
+[
+{
+  "directory": "/home/excius/projects/httpServer/build",
+  "command": "/usr/bin/cc  -I/home/excius/projects/httpServer/include -Wall -Wextra -pedantic -std=gnu17 -o CMakeFiles/http_server.dir/main.c.o -c /home/excius/projects/httpServer/main.c",
+  "file": "/home/excius/projects/httpServer/main.c"
+},
+{
+  "directory": "/home/excius/projects/httpServer/build",
+  "command": "/usr/bin/cc  -I/home/excius/projects/httpServer/include -Wall -Wextra -pedantic -std=gnu17 -o CMakeFiles/http_server.dir/src/server.c.o -c /home/excius/projects/httpServer/src/server.c",
+  "file": "/home/excius/projects/httpServer/src/server.c"
+}
+]
