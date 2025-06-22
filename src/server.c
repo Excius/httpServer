@@ -67,11 +67,55 @@ void handle_client(int client_fd) {
 
   printf("Received:\n%.*s\n", (int)bytes_received, buffer);
 
-  const char *response = "HTTP/1.1 200 OK\r\n"
-                         "Content-Length: 22\r\n"
-                         "Content-Type: text/html\r\n"
-                         "\r\n"
-                         "<H1>Hello, world!</H1>\r\n";
+  char *method = strtok(buffer, " ");
+  char *path = strtok(NULL, " ");
+  char *version = strtok(NULL, "\r\n");
 
-  send(client_fd, response, strlen(response), 0);
+  const char *body = "Hello, world!";
+  char response[1024];
+
+  if (strcmp(method, "GET") == 0) {
+    if (strcmp(path, "/") == 0) {
+
+      snprintf(response, sizeof(response),
+               "HTTP/%s 200 OK\r\n"
+               "Content-Length: %zu\r\n"
+               "Content-Type: text/plain\r\n"
+               "\r\n"
+               "%s",
+               version, strlen(body), body);
+
+      send(client_fd, response, strlen(response), 0);
+
+    } else if (strcmp(path, "/hello") == 0) {
+      const char *body = "Hello, from /hello!";
+      snprintf(response, sizeof(response),
+               "HTTP/1.1 200 OK\r\n"
+               "Content-Length: %zu\r\n"
+               "Content-Type: text/plain\r\n"
+               "\r\n"
+               "%s",
+               strlen(body), body);
+    } else {
+
+      const char *body = "404 Not Found";
+      snprintf(response, sizeof(response),
+               "HTTP/1.1 404 Not Found\r\n"
+               "Content-Length: %zu\r\n"
+               "Content-Type: text/plain\r\n"
+               "\r\n"
+               "%s",
+               strlen(body), body);
+    }
+  } else {
+
+    const char *body = "405 Method Not Allowed";
+    snprintf(response, sizeof(response),
+             "HTTP/1.1 405 Method Not Allowed\r\n"
+             "Content-Length: %zu\r\n"
+             "Content-Type: text/plain\r\n"
+             "\r\n"
+             "%s",
+             strlen(body), body);
+  }
 }
