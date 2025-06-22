@@ -1,3 +1,0 @@
-/home/excius/projects/httpServer/build/CMakeFiles/http_server.dir
-/home/excius/projects/httpServer/build/CMakeFiles/edit_cache.dir
-/home/excius/projects/httpServer/build/CMakeFiles/rebuild_cache.dir
