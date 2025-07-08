@@ -58,3 +58,4 @@ dkms.conf
 
 #Miscellaneous
 compile_commands.json
+.cache
